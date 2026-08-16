@@ -1,0 +1,81 @@
+---
+title: "블로그를 시작하며"
+description: "Next.js와 GitHub Pages로 만든 개인 블로그의 첫 글입니다. 이 블로그가 어떻게 동작하는지 정리합니다."
+date: "2026-08-16"
+tags:
+  - nextjs
+  - blog
+category: "development"
+thumbnail: "/images/posts/hello-world/cover.webp"
+draft: false
+---
+
+첫 글입니다. 이 블로그는 서버도, 데이터베이스도, CMS도 없이 동작합니다.
+글은 전부 이 저장소의 `content/posts` 안에 Markdown 파일로 들어 있고,
+`main` 브랜치에 push하면 GitHub Actions가 정적 사이트를 만들어 GitHub Pages에 올립니다.
+
+## 어떻게 동작하나
+
+빌드 시점에 모든 페이지가 HTML로 만들어지고, 그 결과물만 배포됩니다.
+런타임에 동작하는 서버가 없으니 운영 비용은 0원입니다.
+
+![블로그 빌드 구조](/images/posts/hello-world/architecture.webp)
+
+정리하면 이런 흐름입니다.
+
+1. `content/posts/*.mdx` 를 읽어 front matter를 파싱한다
+2. 글, 목록, 태그 페이지를 정적으로 생성한다
+3. `out/` 디렉터리를 GitHub Pages에 배포한다
+
+<Callout type="info">
+글을 추가하는 방법은 파일 하나를 만드는 것이 전부입니다.
+`content/posts/` 에 `.mdx` 파일을 만들고 push하면 자동으로 페이지가 생깁니다.
+</Callout>
+
+## 글쓰기에 쓸 수 있는 것들
+
+일반적인 Markdown 문법을 모두 사용할 수 있습니다.
+**굵은 글씨**, *기울임*, [Next.js 공식 문서 링크](https://nextjs.org), `인라인 코드` 같은 것들 말이죠.
+
+> 인용문도 됩니다.
+> 여러 줄로 이어서 쓸 수 있습니다.
+
+목록도 마찬가지입니다.
+
+- 순서 없는 목록
+- 중첩도 됩니다
+  - 이렇게
+- 세 번째 항목
+
+표도 지원합니다.
+
+| 기능 | 지원 여부 | 비고 |
+| --- | --- | --- |
+| Markdown | O | GFM 포함 |
+| React 컴포넌트 | O | MDX |
+| 서버 렌더링 | X | 정적 생성만 사용 |
+
+## 코드 블록
+
+코드는 빌드 시점에 하이라이팅됩니다. 브라우저에서 하이라이팅용 JavaScript를 내려받지 않습니다.
+
+```typescript
+interface PostMetadata {
+  title: string
+  description: string
+  date: string
+  tags: string[]
+  draft: boolean
+}
+
+export function isPublished(metadata: PostMetadata): boolean {
+  return !metadata.draft
+}
+```
+
+긴 줄은 가로 스크롤로 처리되고, 코드 블록 오른쪽 위의 복사 버튼으로 전체를 복사할 수 있습니다.
+
+## 앞으로
+
+공부한 내용과 문제를 해결한 과정을 남길 생각입니다.
+글이 쌓이면 태그로 정리될 테니, [Tags](/tags/) 페이지에서 관심 있는 주제를 찾아보셔도 좋습니다.

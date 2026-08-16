@@ -1,0 +1,62 @@
+.callout {
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--callout-border, var(--color-border));
+  border-left-width: 3px;
+  border-radius: var(--radius-md);
+  background-color: var(--callout-bg, var(--color-bg-subtle));
+}
+
+.title {
+  margin-bottom: 0.35rem;
+  color: var(--callout-border, var(--color-text));
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.content > * + * {
+  margin-top: 0.75em;
+}
+
+.content > :first-child {
+  margin-top: 0;
+}
+
+.info {
+  --callout-border: #1257c9;
+  --callout-bg: #eef4fe;
+}
+
+.tip {
+  --callout-border: #0f7a4d;
+  --callout-bg: #eaf7f0;
+}
+
+.warning {
+  --callout-border: #96650a;
+  --callout-bg: #fdf5e5;
+}
+
+.danger {
+  --callout-border: #b3261e;
+  --callout-bg: #fdeeed;
+}
+
+[data-theme='dark'] .info {
+  --callout-border: #7fb0ff;
+  --callout-bg: #141d2e;
+}
+
+[data-theme='dark'] .tip {
+  --callout-border: #6ed3a3;
+  --callout-bg: #10231a;
+}
+
+[data-theme='dark'] .warning {
+  --callout-border: #e8bf6a;
+  --callout-bg: #241d10;
+}
+
+[data-theme='dark'] .danger {
+  --callout-border: #f2938c;
+  --callout-bg: #2a1614;
+}

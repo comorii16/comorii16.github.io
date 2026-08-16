@@ -1,0 +1,100 @@
+.article {
+  max-width: var(--content-width);
+}
+
+.header {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.title {
+  font-size: 1.875rem;
+  font-weight: 800;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.description {
+  margin-top: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  color: var(--color-text-faint);
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.draft {
+  padding: 0.05rem 0.4rem;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  font-size: 0.6875rem;
+  font-weight: 700;
+}
+
+.cover {
+  width: 100%;
+  /* 이미지 크기를 미리 모르므로 비율을 고정해 레이아웃 이동을 막는다 */
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  margin-bottom: 2.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.pagination {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.paginationLink {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+}
+
+.paginationLink:hover {
+  border-color: var(--color-accent);
+  background-color: var(--color-bg-subtle);
+}
+
+.paginationLabel {
+  color: var(--color-text-faint);
+  font-size: 0.75rem;
+}
+
+.paginationTitle {
+  color: var(--color-text);
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+@media (min-width: 48rem) {
+  .title {
+    font-size: 2.25rem;
+  }
+
+  .pagination {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .next {
+    text-align: right;
+  }
+}

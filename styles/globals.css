@@ -1,0 +1,404 @@
+/* =========================================================
+   Design tokens
+   ========================================================= */
+:root {
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, 'Pretendard Variable', Pretendard, 'Apple SD Gothic Neo',
+    'Segoe UI', Roboto, 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, 'SF Mono', 'JetBrains Mono', Menlo, Consolas,
+    'Liberation Mono', monospace;
+
+  --content-width: 44rem;
+  --page-width: 60rem;
+  --page-padding: 1.25rem;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+
+  /* light theme */
+  --color-bg: #ffffff;
+  --color-bg-subtle: #f6f7f9;
+  --color-surface: #ffffff;
+  --color-border: #e3e5e9;
+  --color-border-strong: #c8ccd4;
+  --color-text: #16181d;
+  --color-text-muted: #5b6270;
+  /* 작은 메타 텍스트에 쓰이므로 흰 배경/보조 배경 모두에서 대비 4.5:1 이상을 유지한다 */
+  --color-text-faint: #666d7a;
+  --color-accent: #1257c9;
+  --color-accent-hover: #0e449e;
+  --color-accent-subtle: #eaf1fd;
+  --color-focus: #1257c9;
+  --shadow-card: 0 1px 2px rgb(16 24 40 / 6%);
+
+  color-scheme: light;
+}
+
+[data-theme='dark'] {
+  --color-bg: #0f1115;
+  --color-bg-subtle: #171a21;
+  --color-surface: #14171d;
+  --color-border: #272b34;
+  --color-border-strong: #3a404c;
+  --color-text: #e8eaee;
+  --color-text-muted: #a3aab8;
+  --color-text-faint: #8b93a1;
+  --color-accent: #7fb0ff;
+  --color-accent-hover: #a3c6ff;
+  --color-accent-subtle: #17233a;
+  --color-focus: #7fb0ff;
+  --shadow-card: none;
+
+  color-scheme: dark;
+}
+
+/* =========================================================
+   Reset & base
+   ========================================================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  /* 한국어는 어절 단위로 줄바꿈하고, 넘치는 긴 단어만 강제로 끊는다 */
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  color: var(--color-accent-hover);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+::selection {
+  background-color: var(--color-accent-subtle);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* =========================================================
+   Layout helpers
+   ========================================================= */
+.container {
+  width: 100%;
+  max-width: var(--page-width);
+  margin-inline: auto;
+  padding-inline: var(--page-padding);
+}
+
+.main {
+  flex: 1;
+  padding-block: 2.5rem 4rem;
+}
+
+.skipLink {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  padding: 0.625rem 1rem;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+}
+
+.skipLink:focus {
+  left: 1rem;
+  top: 1rem;
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (min-width: 48rem) {
+  :root {
+    --page-padding: 2rem;
+  }
+
+  .main {
+    padding-block: 3.5rem 5rem;
+  }
+}
+
+/* =========================================================
+   Article typography (.prose)
+   ========================================================= */
+.prose {
+  max-width: var(--content-width);
+  font-size: 1.0625rem;
+  line-height: 1.8;
+}
+
+.prose > * + * {
+  margin-top: 1.25em;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4 {
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  scroll-margin-top: 5rem;
+  text-wrap: balance;
+}
+
+.prose h1 {
+  margin-top: 2.5rem;
+  font-size: 1.875rem;
+}
+
+.prose h2 {
+  margin-top: 2.75rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 1.5rem;
+}
+
+.prose h3 {
+  margin-top: 2rem;
+  font-size: 1.25rem;
+}
+
+.prose h4 {
+  margin-top: 1.75rem;
+  font-size: 1.0625rem;
+}
+
+.prose strong {
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.prose em {
+  font-style: italic;
+}
+
+.prose blockquote {
+  padding: 0.25rem 0 0.25rem 1.125rem;
+  border-left: 3px solid var(--color-border-strong);
+  color: var(--color-text-muted);
+}
+
+.prose blockquote > * + * {
+  margin-top: 0.75em;
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.5rem;
+}
+
+.prose ul {
+  list-style: disc;
+}
+
+.prose ol {
+  list-style: decimal;
+}
+
+.prose li + li {
+  margin-top: 0.4em;
+}
+
+.prose li > ul,
+.prose li > ol {
+  margin-top: 0.4em;
+}
+
+.prose li::marker {
+  color: var(--color-text-faint);
+}
+
+.prose hr {
+  margin-block: 2.5rem;
+  border: 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.prose :not(pre) > code {
+  padding: 0.15em 0.4em;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-bg-subtle);
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+}
+
+.prose img {
+  margin-inline: auto;
+  border-radius: var(--radius-md);
+}
+
+.prose figure figcaption {
+  margin-top: 0.5rem;
+  color: var(--color-text-faint);
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.prose .tableWrapper {
+  overflow-x: auto;
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+}
+
+.prose th,
+.prose td {
+  padding: 0.6rem 0.85rem;
+  border: 1px solid var(--color-border);
+  text-align: left;
+}
+
+.prose thead th {
+  background-color: var(--color-bg-subtle);
+  font-weight: 600;
+}
+
+.prose kbd {
+  padding: 0.1em 0.4em;
+  border: 1px solid var(--color-border-strong);
+  border-bottom-width: 2px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 0.8125em;
+}
+
+/* =========================================================
+   Code blocks (rehype-pretty-code + shiki, build-time)
+   ========================================================= */
+.prose pre {
+  overflow-x: auto;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-bg-subtle);
+  font-size: 0.875rem;
+  line-height: 1.65;
+  tab-size: 2;
+}
+
+.prose pre code {
+  display: grid;
+  font-family: var(--font-mono);
+  counter-reset: line;
+}
+
+.prose pre code > .line {
+  padding-inline: 0;
+}
+
+/* rehype-pretty-code 는 코드 블록을 figure 로 감싼다 */
+.prose figure[data-rehype-pretty-code-figure] {
+  margin-inline: 0;
+}
+
+.prose [data-rehype-pretty-code-title] {
+  padding: 0.5rem 0.9rem;
+  border: 1px solid var(--color-border);
+  border-bottom: 0;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  background-color: var(--color-bg-subtle);
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  text-align: left;
+}
+
+.prose [data-rehype-pretty-code-title] + div {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+/*
+ * shiki 가 라이트/다크 두 벌의 색을 CSS 변수(--shiki-light / --shiki-dark)로 함께 내보낸다.
+ * 실제 색을 고르는 것은 여기 두 규칙뿐이라 테마 전환에 JS 가 필요 없다.
+ */
+.prose pre[data-theme] span {
+  color: var(--shiki-light);
+  font-style: var(--shiki-light-font-style, normal);
+  font-weight: var(--shiki-light-font-weight, inherit);
+  text-decoration: var(--shiki-light-text-decoration, none);
+}
+
+[data-theme='dark'] .prose pre[data-theme] span {
+  color: var(--shiki-dark);
+  font-style: var(--shiki-dark-font-style, normal);
+  font-weight: var(--shiki-dark-font-weight, inherit);
+  text-decoration: var(--shiki-dark-text-decoration, none);
+}
+
+[data-highlighted-line] {
+  background-color: var(--color-accent-subtle);
+  box-shadow: inset 3px 0 0 var(--color-accent);
+}

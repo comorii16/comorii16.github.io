@@ -1,0 +1,4 @@
+# eslint 의존성(unrs-resolver)은 네이티브 바이너리 설치를 위해 postinstall 실행이 필요하다.
+# pnpm 은 기본적으로 빌드 스크립트를 막으므로 여기서 명시적으로 허용한다.
+allowBuilds:
+  unrs-resolver: true

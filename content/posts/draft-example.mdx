@@ -1,0 +1,16 @@
+---
+title: "쓰는 중인 글 (draft 예시)"
+description: "draft: true 인 글은 개발 환경에서만 보이고 production 빌드에서는 제외됩니다."
+date: "2026-08-16"
+tags:
+  - blog
+draft: true
+---
+
+이 글은 `draft: true` 입니다.
+
+`pnpm dev` 로 실행하면 목록과 상세 페이지에 모두 나타나지만,
+`pnpm build` 로 만든 결과물에는 페이지 자체가 생성되지 않습니다.
+sitemap과 RSS에도 포함되지 않습니다.
+
+발행할 준비가 되면 front matter의 `draft` 를 `false` 로 바꾸면 됩니다.
